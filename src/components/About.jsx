@@ -1,7 +1,7 @@
 export default function About() {
   const galleryItems = [
     {
-      img: '/tps-desa-barang.png',
+      img: '/tps-desa-barang.jpeg',
       label: 'TPS Desa Barang',
     },
     {

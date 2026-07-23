@@ -14,8 +14,8 @@ export default function Navbar() {
 
   const links = [
     { label: 'Beranda', href: '#beranda', active: true },
-    { label: 'Tentang', href: '#tentang' },
     { label: 'Cara Memilah', href: '#cara-memilah' },
+    { label: 'Lilin Aromaterapi', href: '#lilin-aromaterapi' },
     { label: 'Alur Pengelolaan', href: '#alur' },
     { label: 'Video', href: '#video' },
     { label: 'Lokasi', href: '#lokasi' },

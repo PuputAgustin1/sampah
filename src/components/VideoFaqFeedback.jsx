@@ -4,7 +4,7 @@ export default function VideoFaqFeedback() {
   const [openFaq, setOpenFaq] = useState(null)
 
   const videos = [
-    { title: 'Cara Memilah Sampah', thumb: '/tps-desa-barang.png' },
+    { title: 'Cara Memilah Sampah', thumb: '/tps-desa-barang.jpeg' },
     { title: 'Mesin Press Plastik', thumb: '/mesin-press.png' },
     { title: 'Budidaya Maggot', thumb: '/budidaya-maggot.png' },
   ]

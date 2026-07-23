@@ -1,8 +1,8 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Categories from './components/Categories'
-import About from './components/About'
-import WasteSorting from './components/WasteSorting'
+import AromatherapyCandle from './components/AromatherapyCandle'
+import ResiduGuide from './components/ResiduGuide'
 import FlowDiagram from './components/FlowDiagram'
 import VideoFaqFeedback from './components/VideoFaqFeedback'
 import LocationContact from './components/LocationContact'
@@ -15,8 +15,8 @@ function App() {
       <Navbar />
       <Hero />
       <Categories />
-      <About />
-      <WasteSorting />
+      <AromatherapyCandle />
+      <ResiduGuide />
       <FlowDiagram />
       <VideoFaqFeedback />
       <LocationContact />
