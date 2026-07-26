@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import useScrollReveal from '../hooks/useScrollReveal'
 
 export default function VideoFaqFeedback() {
+  const ref = useScrollReveal()
   const [openFaq, setOpenFaq] = useState(null)
 
   const videos = [
@@ -33,11 +35,11 @@ export default function VideoFaqFeedback() {
   }
 
   return (
-    <section className="video-section" id="video">
+    <section className="video-section" id="video" ref={ref}>
       <div className="container">
         <div className="video-faq-grid">
           {/* Video Block */}
-          <div className="video-block">
+          <div className="video-block reveal-left">
             <h3>🎬 VIDEO EDUKASI</h3>
             <div className="video-grid">
               {videos.map((video, index) => (
@@ -58,7 +60,7 @@ export default function VideoFaqFeedback() {
           </div>
 
           {/* FAQ Block */}
-          <div className="faq-block" id="faq">
+          <div className="faq-block reveal reveal-delay-1" id="faq">
             <h3>❓ FAQ</h3>
             <div className="faq-list">
               {faqs.map((faq, index) => (
@@ -80,7 +82,7 @@ export default function VideoFaqFeedback() {
           </div>
 
           {/* Feedback Block */}
-          <div className="feedback-block">
+          <div className="feedback-block reveal-right reveal-delay-2">
             <h3>📢 SUARA ANDA PENTING!</h3>
             <p className="feedback-text">
               Berikan masukan atau laporkan kendala terkait sampah di desa kita.

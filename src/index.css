@@ -599,47 +599,64 @@ button {
   font-size: 1.2rem;
 }
 
+.residu-subtitle {
+  color: var(--red-600) !important;
+}
+
 .residu-steps-container {
   background: white;
   border-radius: var(--radius-lg);
-  padding: 40px;
+  padding: 40px 32px;
   box-shadow: var(--shadow-sm);
   margin-bottom: 24px;
 }
 
+/* Steps row */
 .residu-steps {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   justify-content: space-between;
-  gap: 16px;
+  gap: 0;
 }
 
-.residu-step {
+/* Individual card */
+.residu-step-card {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 16px;
   position: relative;
 }
 
-.residu-step:not(:last-child)::after {
-  content: '→';
-  position: absolute;
-  top: 12px;
-  right: -20px;
-  color: var(--red-400);
-  font-size: 1.5rem;
+/* Remove right padding on last card */
+.residu-step-card:last-child {
+  padding-right: 0;
+}
+.residu-step-card:first-child {
+  padding-left: 0;
 }
 
-.residu-step-header {
+/* Icon circle on top */
+.residu-card-icon {
+  width: 64px;
+  height: 64px;
+  background: var(--red-50);
+  border: 2px solid var(--red-100);
+  border-radius: 50%;
   display: flex;
-  gap: 8px;
-  align-items: flex-start;
-  margin-bottom: 12px;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
-.step-num {
-  width: 24px;
-  height: 24px;
+/* Number badge */
+.residu-card-num {
+  width: 26px;
+  height: 26px;
   background: var(--red-600);
   color: white;
   border-radius: 50%;
@@ -648,28 +665,47 @@ button {
   justify-content: center;
   font-size: 0.8rem;
   font-weight: 800;
+  margin-bottom: 10px;
   flex-shrink: 0;
 }
 
-.residu-step h4 {
-  font-size: 1rem;
+/* Title */
+.residu-card-title {
+  font-size: 0.9rem;
   font-weight: 800;
   color: var(--red-600);
-  line-height: 1.3;
+  line-height: 1.35;
+  margin-bottom: 8px;
 }
 
-.residu-step p {
-  font-size: 0.9rem;
-  color: var(--gray-700);
+.residu-card-subtitle {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--gray-500);
+}
+
+/* Description — pushed to bottom via margin-top auto */
+.residu-card-desc {
+  font-size: 0.82rem;
+  color: var(--gray-600);
   line-height: 1.5;
-  margin-bottom: 16px;
+  margin-top: auto;
 }
 
-.residu-step-img {
-  text-align: center;
-  font-size: 3rem;
+/* Arrow between cards */
+.residu-card-arrow {
+  position: absolute;
+  top: 30px; /* aligns with icon center */
+  right: -10px;
+  color: var(--red-300);
+  font-size: 1.3rem;
+  font-weight: bold;
+  z-index: 1;
+  pointer-events: none;
 }
 
+/* Notice boxes */
 .residu-notices {
   display: flex;
   gap: 24px;
@@ -688,12 +724,12 @@ button {
 
 .residu-notice.wash {
   background: #fff8e1;
-  /* light yellow */
   border-color: #ffecb3;
 }
 
 .notice-icon {
   font-size: 2.5rem;
+  flex-shrink: 0;
 }
 
 .notice-text h5 {
@@ -724,7 +760,10 @@ button {
   content: '✖';
   color: var(--red-500);
   font-weight: bold;
+  flex-shrink: 0;
 }
+
+
 
 /* ========================= */
 /*  Flow Diagram             */
@@ -735,123 +774,204 @@ button {
   background: var(--white);
 }
 
-.flow-container {
+/* ── Main row ── */
+.fd-main-row {
   display: flex;
-  align-items: stretch;
-  gap: 20px;
-  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 8px;
 }
 
-.flow-box {
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-md);
-  padding: 20px;
+.fd-main-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* Node box */
+.fd-node {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  flex: 1;
-  position: relative;
+  background: var(--green-50);
+  border: 2px solid var(--green-200);
+  border-radius: var(--radius-lg);
+  padding: 20px 28px;
+  min-width: 160px;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-.flow-box-header {
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: var(--green-800);
-  margin-bottom: 12px;
+.fd-node:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
 
-.flow-box p {
-  font-size: 0.9rem;
-  color: var(--gray-600);
-  margin-bottom: 16px;
+.fd-node-icon {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
 }
 
-.flow-icon-large {
-  font-size: 4rem;
-  margin-top: auto;
-}
-
-.flow-branches {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex: 2;
-}
-
-.flow-branch {
-  display: flex;
-  align-items: center;
-  background: var(--white);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  gap: 16px;
-}
-
-.flow-branch.organik {
-  border-left: 6px solid var(--green-500);
-}
-
-.flow-branch.anorganik {
-  border-left: 6px solid var(--orange-500);
-}
-
-.flow-branch.residu {
-  border-left: 6px solid var(--red-500);
-}
-
-.branch-title {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  width: 140px;
-}
-
-.branch-title span:first-child {
+.fd-node-label {
   font-size: 1rem;
   font-weight: 800;
+  color: var(--green-800);
+  margin-bottom: 4px;
 }
 
-.branch-title span:last-child {
-  font-size: 0.8rem;
-  color: var(--gray-600);
+.fd-node-sub {
+  font-size: 0.78rem;
+  color: var(--gray-500);
+  font-weight: 500;
 }
 
-.flow-branch.organik .branch-title span:first-child {
-  color: var(--green-700);
-}
-
-.flow-branch.anorganik .branch-title span:first-child {
-  color: var(--orange-600);
-}
-
-.flow-branch.residu .branch-title span:first-child {
-  color: var(--red-600);
-}
-
-.branch-arrow {
-  color: var(--green-500);
+/* Arrow between nodes */
+.fd-arrow-h {
+  font-size: 1.6rem;
+  color: var(--green-400);
+  padding: 0 12px;
   font-weight: bold;
 }
 
-.branch-content {
+/* ── Vertical connector ── */
+.fd-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 20px;
+}
+
+.fd-connector-line {
+  width: 2px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--green-300), var(--gray-300));
+  border-radius: 2px;
+}
+
+.fd-connector-dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.fd-connector-dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: block;
+}
+
+.fd-connector-dots span:nth-child(1) {
+  background: var(--green-500);
+}
+.fd-connector-dots span:nth-child(2) {
+  background: var(--orange-400);
+}
+.fd-connector-dots span:nth-child(3) {
+  background: var(--red-400);
+}
+
+/* ── Branch cards row ── */
+.fd-branches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Individual branch card */
+.fd-branch-card {
+  border: 2px solid var(--branch-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.fd-branch-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Card header */
+.fd-branch-head {
+  background: var(--branch-bg);
+  border-bottom: 2px solid var(--branch-border);
+  padding: 16px 20px;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+}
+
+.fd-branch-icon {
+  font-size: 1.6rem;
+  width: 40px;
+  height: 40px;
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  flex-shrink: 0;
+}
+
+.fd-branch-label {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--branch-color);
+  letter-spacing: 0.3px;
+}
+
+/* Card body — output chain */
+.fd-branch-body {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+}
+
+.fd-output-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fd-output-arrow {
+  color: var(--branch-color);
+  font-size: 1.1rem;
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+.fd-output {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+  background: var(--branch-bg);
+  border: 1px solid var(--branch-border);
+  border-radius: var(--radius-md);
+  padding: 12px 10px;
 }
 
-.branch-img {
-  font-size: 2.5rem;
+.fd-output-icon {
+  font-size: 1.6rem;
 }
 
-.branch-list {
-  font-size: 0.9rem;
+.fd-output-label {
+  font-size: 0.78rem;
+  font-weight: 700;
   color: var(--gray-700);
-  font-weight: 600;
+  line-height: 1.3;
 }
+
+
 
 /* ================================= */
 /*  Video, FAQ & Feedback Components */
@@ -1315,71 +1435,422 @@ button {
   opacity: 0.6;
 }
 
-/* ========================= */
-/*  Responsive               */
-/* ========================= */
-@media (max-width: 1024px) {
-  .hero-inner {
-    flex-direction: column;
-  }
+/* ========================================= */
+/*  Navbar Mobile Toggle Button              */
+/* ========================================= */
 
-  .hero-image {
-    display: none;
-  }
-
-  .hero::before {
-    display: none;
-  }
-
-  .sorting-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .residu-steps {
-    flex-direction: column;
-  }
-
-  .residu-step:not(:last-child)::after {
-    top: auto;
-    bottom: -20px;
-    right: 50%;
-    transform: rotate(90deg) translateX(50%);
-  }
-
-  .flow-container {
-    flex-direction: column;
-  }
-
-  .video-faq-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .location-contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+/* Hamburger — hidden on desktop */
+.navbar-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: var(--green-800);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  line-height: 1;
 }
 
-@media (max-width: 768px) {
-  .hero-features {
-    grid-template-columns: 1fr 1fr;
+.navbar-mobile-toggle:hover {
+  background: var(--green-50);
+}
+
+/* ========================================= */
+/*  Responsive — 1024px (Tablet)             */
+/* ========================================= */
+@media (max-width: 1024px) {
+
+  /* --- Navbar --- */
+  .navbar-mobile-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .sort-card-body {
+  .navbar-links {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
     flex-direction: column;
+    padding: 16px 24px 24px;
+    gap: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--gray-200);
+    z-index: 999;
+  }
+
+  .navbar-links.mobile-open {
+    display: flex;
+  }
+
+  .navbar-links a {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-radius: var(--radius-md);
+  }
+
+  .navbar-links a.active {
+    background: var(--green-50);
+  }
+
+  /* --- Hero --- */
+  .hero {
+    padding: 60px 0 60px;
+  }
+
+  .hero-inner {
+    flex-direction: column;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    flex: unset;
+    width: 100%;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+  }
+
+  .hero-subtitle {
+    max-width: 100%;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-features-inline {
+    justify-content: center;
+  }
+
+  .hero-image-masonry {
+    flex: unset;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* --- Categories --- */
+  .sorting-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* --- Residu --- */
+  .residu-steps {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .residu-step-card {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+    padding: 0;
+    gap: 16px;
+  }
+
+  .residu-card-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    margin-bottom: 0;
+  }
+
+  .residu-card-num {
+    margin-bottom: 6px;
+  }
+
+  .residu-card-arrow {
+    position: static;
+    transform: rotate(90deg);
+    display: block;
+    text-align: center;
+    color: var(--red-300);
+    font-size: 1.3rem;
   }
 
   .residu-notices {
     flex-direction: column;
   }
 
-  .footer-grid {
+
+  /* --- Flow Diagram --- */
+  .fd-main-row {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .fd-branches {
     grid-template-columns: 1fr;
   }
+
+  .fd-node {
+    min-width: 130px;
+    padding: 16px 20px;
+  }
+
+  /* --- Video / FAQ --- */
+  .video-faq-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* --- Location Contact --- */
+  .location-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* --- Candle Steps --- */
+  .candle-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Footer --- */
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
+
+/* ========================================= */
+/*  Responsive — 768px (Phablet)             */
+/* ========================================= */
+@media (max-width: 768px) {
+
+  /* --- Global --- */
+  :root {
+    --section-padding: 44px 0;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  /* --- Hero --- */
+  .hero-title {
+    font-size: 2.6rem;
+  }
+
+  .hero-image-masonry {
+    max-width: 340px;
+  }
+
+  .masonry-img-1, .masonry-img-4 { height: 180px; }
+  .masonry-img-2, .masonry-img-3 { height: 120px; }
+
+  /* --- Categories Card body --- */
+  .sort-card-body {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sort-bin-img {
+    width: auto;
+  }
+
+  .sort-items-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  /* --- Candle Steps (horizontal scroll on tablet) --- */
+  .candle-steps-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 16px;
+  }
+
+  .candle-steps-grid {
+    min-width: 760px;
+  }
+
+  /* --- Flow branches stacked --- */
+  .flow-branches {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .flow-branch {
+    width: 100%;
+  }
+
+  /* --- Video grid compact --- */
+  .video-faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* --- Location map shorter --- */
+  .location-map {
+    height: 220px;
+  }
+}
+
+/* ========================================= */
+/*  Responsive — 480px (Mobile)              */
+/* ========================================= */
+@media (max-width: 480px) {
+
+  /* --- Global --- */
+  :root {
+    --section-padding: 36px 0;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  /* --- Navbar --- */
+  .navbar-logo-text h1 {
+    font-size: 1rem;
+  }
+
+  /* --- Hero --- */
+  .hero {
+    padding: 48px 0 40px;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    padding: 13px 26px;
+    font-size: 0.95rem;
+  }
+
+  .hero-features-inline {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .hero-image-masonry {
+    max-width: 280px;
+  }
+
+  .masonry-img-1, .masonry-img-4 { height: 140px; }
+  .masonry-img-2, .masonry-img-3 { height: 100px; }
+
+  /* --- Section titles --- */
+  .section-title {
+    font-size: 1.1rem;
+    gap: 8px;
+  }
+
+  .section-subtitle {
+    font-size: 0.9rem;
+  }
+
+  /* --- Categories --- */
+  .sort-items-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sort-item-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .sort-note {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .sort-note-truck {
+    display: none;
+  }
+
+  /* --- Residu --- */
+  .residu-steps-container {
+    padding: 24px 16px;
+  }
+
+  /* --- Flow --- */
+  .flow-step {
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    text-align: left;
+  }
+
+  .flow-step-icon {
+    font-size: 2rem;
+  }
+
+  .flow-branch-steps {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* --- Candle --- */
+  .candle-step-card {
+    padding: 18px 12px;
+  }
+
+  .candle-step-icon {
+    font-size: 2rem;
+  }
+
+  .candle-info-card {
+    padding: 20px 16px;
+  }
+
+  /* --- Video FAQ --- */
+  .video-block,
+  .faq-block,
+  .feedback-block {
+    padding: 18px 16px;
+  }
+
+  .video-card-thumb {
+    width: 64px;
+    height: 44px;
+  }
+
+  /* --- Location Contact --- */
+  .location-block,
+  .contact-block {
+    padding: 20px 16px;
+  }
+
+  .location-map {
+    height: 180px;
+  }
+
+  /* --- Footer --- */
+  .footer {
+    padding: 40px 0 16px;
+  }
+
+  .footer-bottom {
+    font-size: 0.7rem;
+  }
+}
+
 
 /* ========================= */
 /*  Lilin Aromaterapi Section*/
@@ -1625,3 +2096,53 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* ======================================= */
+/*  Scroll Reveal Animations               */
+/* ======================================= */
+
+/* --- Base states (hidden before reveal) --- */
+.reveal,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  will-change: opacity, transform;
+}
+
+/* Fade up (default) */
+.reveal {
+  transform: translateY(36px);
+}
+
+/* Slide from left */
+.reveal-left {
+  transform: translateX(-48px);
+}
+
+/* Slide from right */
+.reveal-right {
+  transform: translateX(48px);
+}
+
+/* Scale up */
+.reveal-scale {
+  transform: scale(0.92);
+}
+
+/* --- Revealed state (added by JS observer) --- */
+.reveal.revealed,
+.reveal-left.revealed,
+.reveal-right.revealed,
+.reveal-scale.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- Staggered delays --- */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }

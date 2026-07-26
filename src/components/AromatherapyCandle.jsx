@@ -1,4 +1,8 @@
+import useScrollReveal from '../hooks/useScrollReveal'
+
 export default function AromatherapyCandle() {
+  const ref = useScrollReveal()
+
   const steps = [
     {
       step: 1,
@@ -68,9 +72,9 @@ export default function AromatherapyCandle() {
   ]
 
   return (
-    <section className="candle-section" id="lilin-aromaterapi">
+    <section className="candle-section" id="lilin-aromaterapi" ref={ref}>
       <div className="container">
-        <div className="section-title-wrapper">
+        <div className="section-title-wrapper reveal">
           <h2 className="section-title">
             STEP PEMBUATAN LILIN AROMATERAPI DARI MINYAK JELANTAH
           </h2>
@@ -83,7 +87,7 @@ export default function AromatherapyCandle() {
         <div className="candle-steps-container">
           <div className="candle-steps-grid">
             {steps.map((item, index) => (
-              <div key={item.step} className="candle-step-card">
+              <div key={item.step} className={`candle-step-card reveal reveal-delay-${Math.min(item.step, 5)}`}>
                 <div className="candle-step-badge">{item.step}</div>
                 <div className="candle-step-icon">{item.icon}</div>
                 <h3 className="candle-step-title">{item.title}</h3>

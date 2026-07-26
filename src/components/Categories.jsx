@@ -1,4 +1,8 @@
+import useScrollReveal from '../hooks/useScrollReveal'
+
 export default function Categories() {
+  const ref = useScrollReveal()
+
   const organikItems = [
     { icon: '🍛', label: 'Sisa Makanan' },
     { icon: '🍂', label: 'Daun' },
@@ -24,14 +28,14 @@ export default function Categories() {
   ]
 
   return (
-    <section className="sorting" id="cara-memilah">
+    <section className="sorting" id="cara-memilah" ref={ref}>
       <div className="container">
-        <h2 className="section-title">CARA MEMILAH DI RUMAH</h2>
-        <p className="section-subtitle">Di rumah, kita cukup memilah sampah menjadi 2 jenis:</p>
+        <h2 className="section-title reveal">CARA MEMILAH DI RUMAH</h2>
+        <p className="section-subtitle reveal reveal-delay-1">Di rumah, kita cukup memilah sampah menjadi 2 jenis:</p>
 
         <div className="sorting-grid">
           {/* Organik */}
-          <div className="sort-card organik">
+          <div className="sort-card organik reveal-left reveal-delay-1">
             <div className="sort-card-header">
               <h3>SAMPAH ORGANIK</h3>
               <p className="sort-card-desc">Sampah yang mudah terurai secara alami</p>
@@ -59,7 +63,7 @@ export default function Categories() {
 
 
           {/* Anorganik */}
-          <div className="sort-card anorganik">
+          <div className="sort-card anorganik reveal-right reveal-delay-2">
             <div className="sort-card-header">
               <h3>SAMPAH ANORGANIK</h3>
               <p className="sort-card-desc">Sampah yang tidak mudah terurai</p>

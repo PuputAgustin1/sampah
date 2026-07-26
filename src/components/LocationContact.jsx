@@ -1,4 +1,8 @@
+import useScrollReveal from '../hooks/useScrollReveal'
+
 export default function LocationContact() {
+  const ref = useScrollReveal()
+
   const locations = [
     { icon: '📍', name: 'TPS Desa Barang' },
     { icon: '🏦', name: 'Bank Sampah' },
@@ -6,11 +10,11 @@ export default function LocationContact() {
   ]
 
   return (
-    <section className="location-contact" id="lokasi">
+    <section className="location-contact" id="lokasi" ref={ref}>
       <div className="container">
         <div className="location-contact-grid">
           {/* Location */}
-          <div className="location-block">
+          <div className="location-block reveal-left">
             <h3>📍 LOKASI PENTING</h3>
 
             <div className="location-map">
@@ -37,7 +41,7 @@ export default function LocationContact() {
           </div>
 
           {/* Contact */}
-          <div className="contact-block" id="kontak">
+          <div className="contact-block reveal-right reveal-delay-1" id="kontak">
             <h3>📞 KONTAK</h3>
 
             <div className="contact-info">

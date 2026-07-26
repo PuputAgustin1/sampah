@@ -1,8 +1,12 @@
+import useScrollReveal from '../hooks/useScrollReveal'
+
 export default function Footer() {
+  const ref = useScrollReveal()
+
   return (
-    <footer className="footer">
+    <footer className="footer" ref={ref}>
       <div className="container">
-        <div className="footer-inner">
+        <div className="footer-inner reveal">
           <div className="footer-brand">
             <h3>♻ SIPILAH DESA BARANG</h3>
             <p>KKN UNNES 2026</p>
