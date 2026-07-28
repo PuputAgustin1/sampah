@@ -92,7 +92,6 @@ export default function AromatherapyCandle() {
                 <div className="candle-step-icon">{item.icon}</div>
                 <h3 className="candle-step-title">{item.title}</h3>
                 <p className="candle-step-desc">{item.desc}</p>
-                {index < steps.length - 1 && <div className="candle-step-arrow">➔</div>}
               </div>
             ))}
           </div>

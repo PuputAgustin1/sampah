@@ -15,9 +15,9 @@ function App() {
       <Navbar />
       <Hero />
       <Categories />
-      <AromatherapyCandle />
       <ResiduGuide />
       <FlowDiagram />
+      <AromatherapyCandle />
       <VideoFaqFeedback />
       <LocationContact />
       <Footer />

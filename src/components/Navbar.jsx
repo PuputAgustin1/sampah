@@ -1,15 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('beranda')
 
+  const isClickScrolling = useRef(false)
+  const clickTimeout = useRef(null)
+
   const links = [
     { label: 'Beranda',         href: '#beranda',          id: 'beranda' },
     { label: 'Cara Memilah',    href: '#cara-memilah',     id: 'cara-memilah' },
-    { label: 'Lilin Aromaterapi', href: '#lilin-aromaterapi', id: 'lilin-aromaterapi' },
     { label: 'Alur Pengelolaan', href: '#alur',            id: 'alur' },
+    { label: 'Lilin Aromaterapi', href: '#lilin-aromaterapi', id: 'lilin-aromaterapi' },
     { label: 'Video',           href: '#video',            id: 'video' },
     { label: 'Lokasi',          href: '#lokasi',           id: 'lokasi' },
     { label: 'FAQ',             href: '#faq',              id: 'faq' },
@@ -23,41 +26,44 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  /* ── Active section via IntersectionObserver ─────────── */
+  /* ── Active section via Scroll Position ──────────────── */
   useEffect(() => {
-    const sectionIds = links.map((l) => l.id)
-    const observers = []
+    const handleScroll = () => {
+      if (isClickScrolling.current) return
 
-    // Track which sections are currently intersecting
-    const intersectingMap = {}
+      const sectionIds = links.map((l) => l.id)
+      const scrollPosition = window.scrollY + 120 // offset for sticky navbar + spacing
 
-    const updateActive = () => {
-      // Pick the first section (top-most in the page) that is intersecting
-      const firstVisible = sectionIds.find((id) => intersectingMap[id])
-      if (firstVisible) setActiveSection(firstVisible)
+      let active = 'beranda'
+      for (const id of sectionIds) {
+        const el = document.getElementById(id)
+        if (el) {
+          const rect = el.getBoundingClientRect()
+          const top = rect.top + window.scrollY
+          if (scrollPosition >= top) {
+            active = id
+          }
+        }
+      }
+      setActiveSection(active)
     }
 
-    sectionIds.forEach((id) => {
-      const el = document.getElementById(id)
-      if (!el) return
+    window.addEventListener('scroll', handleScroll)
+    handleScroll() // Initial check
 
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          intersectingMap[id] = entry.isIntersecting
-          updateActive()
-        },
-        {
-          // Fire when the section occupies at least 20% of the viewport
-          threshold: 0,
-          rootMargin: '-30% 0px -60% 0px',
-        }
-      )
-      obs.observe(el)
-      observers.push(obs)
-    })
-
-    return () => observers.forEach((o) => o.disconnect())
+    return () => window.removeEventListener('scroll', handleScroll)
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleLinkClick = (id) => {
+    isClickScrolling.current = true
+    setActiveSection(id)
+    setMobileOpen(false)
+
+    if (clickTimeout.current) clearTimeout(clickTimeout.current)
+    clickTimeout.current = setTimeout(() => {
+      isClickScrolling.current = false
+    }, 800)
+  }
 
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} id="navbar">
@@ -76,7 +82,7 @@ export default function Navbar() {
               key={link.label}
               href={link.href}
               className={activeSection === link.id ? 'active' : ''}
-              onClick={() => setMobileOpen(false)}
+              onClick={() => handleLinkClick(link.id)}
             >
               {link.label}
             </a>

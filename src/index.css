@@ -84,6 +84,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 90px;
   font-size: 16px;
 }
 
@@ -417,166 +418,8 @@ button {
 /*  Waste Sorting (Rumah)    */
 /* ========================= */
 
-.sorting {
-  padding: var(--section-padding);
-  background: var(--white);
-}
 
-.sorting-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-}
 
-.sort-card {
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  border: 1px solid var(--gray-200);
-  display: flex;
-  flex-direction: column;
-}
-
-.sort-card.organik {
-  background: var(--green-50);
-  border-color: var(--green-200);
-}
-
-.sort-card.anorganik {
-  background: var(--orange-50);
-  border-color: var(--orange-200);
-}
-
-.sort-card-header {
-  padding: 24px;
-  text-align: center;
-}
-
-.sort-card h3 {
-  font-size: 1.25rem;
-  font-weight: 900;
-}
-
-.sort-card.organik h3 {
-  color: var(--green-800);
-}
-
-.sort-card.anorganik h3 {
-  color: var(--orange-600);
-}
-
-.sort-card-desc {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--gray-700);
-  margin-top: 4px;
-}
-
-.sort-card-body {
-  display: flex;
-  padding: 0 24px 24px;
-  gap: 20px;
-  align-items: center;
-}
-
-.sort-bin-img {
-  width: 120px;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.sort-bin-icon {
-  font-size: 80px;
-}
-
-.sort-items-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  width: 100%;
-}
-
-.sort-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 6px;
-}
-
-.sort-item-icon {
-  width: 48px;
-  height: 48px;
-  background: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.sort-item-text {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--gray-700);
-}
-
-.sort-card-footer {
-  padding: 16px;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.sort-card.organik .sort-card-footer {
-  background: var(--green-100);
-  color: var(--green-1000);
-}
-
-.sort-card.anorganik .sort-card-footer {
-  background: var(--orange-100);
-  color: var(--orange-600);
-}
-
-.sort-note {
-  margin-top: 32px;
-  background: var(--gray-50);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-md);
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.sort-note-icon {
-  font-size: 2rem;
-}
-
-.sort-note-text {
-  flex: 1;
-}
-
-.sort-note-text strong {
-  color: var(--green-800);
-  display: block;
-  margin-bottom: 4px;
-  font-size: 1.05rem;
-}
-
-.sort-note-text p {
-  font-size: 1rem;
-  color: var(--gray-700);
-}
-
-.sort-note-truck {
-  font-size: 3rem;
-}
 
 /* ========================= */
 /*  Residu Guide             */
@@ -1266,6 +1109,317 @@ button {
   color: var(--gray-850);
 }
 
+.sorting {
+  padding: var(--section-padding);
+  background: var(--white);
+}
+
+/* Legacy grid kept for other potential uses */
+.sorting-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* ── Unified interactive sorting card ── */
+.sort-unified-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+
+/* Header progress */
+.sort-unified-header {
+  padding: 20px 28px 16px;
+  border-bottom: 1px solid var(--gray-100);
+  background: var(--gray-50);
+}
+
+.sort-progress-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sort-progress-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--green-800);
+}
+
+.sort-restore-all-btn {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-full);
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sort-restore-all-btn:hover {
+  background: var(--gray-200);
+  color: var(--gray-900);
+}
+
+.sort-progress-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--gray-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.sort-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green-400), var(--green-600));
+  border-radius: var(--radius-full);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Trash items area */
+.sort-items-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 28px;
+  min-height: 160px;
+}
+
+.sort-item-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 12px 10px 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 88px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.sort-item-btn:hover:not(:disabled) {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.sort-item-btn.organik:hover:not(:disabled) {
+  border-color: var(--green-300);
+  background: var(--green-50);
+}
+
+.sort-item-btn.anorganik:hover:not(:disabled) {
+  border-color: var(--orange-300);
+  background: var(--orange-50);
+}
+
+.sort-item-btn.thrown {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.6);
+}
+
+.sort-item-btn .sort-item-icon {
+  width: 44px;
+  height: 44px;
+  font-size: 1.4rem;
+  background: var(--gray-50);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sort-item-btn .sort-item-text {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.sort-item-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+}
+
+.sort-item-badge.organik {
+  background: var(--green-100);
+}
+
+.sort-item-badge.anorganik {
+  background: var(--orange-100);
+}
+
+/* Bins row */
+.sort-bins-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1.5px solid var(--gray-200);
+}
+
+.sort-bin-card {
+  padding: 20px 24px 24px;
+  transition: background 0.3s;
+}
+
+.sort-bin-card.organik {
+  background: var(--green-50);
+  border-right: 1px solid var(--gray-200);
+}
+
+.sort-bin-card.anorganik {
+  background: var(--orange-50);
+}
+
+@keyframes bin-shake {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-6deg) scale(1.05); }
+  50%  { transform: rotate(6deg) scale(1.08); }
+  75%  { transform: rotate(-3deg) scale(1.04); }
+  100% { transform: rotate(0deg); }
+}
+
+.sort-bin-card.bin-shake .sort-bin-icon-wrap {
+  animation: bin-shake 0.35s ease;
+}
+
+.sort-bin-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.sort-bin-icon-wrap {
+  flex-shrink: 0;
+}
+
+.sort-bin-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sort-bin-name {
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.sort-bin-card.organik .sort-bin-name {
+  color: var(--green-800);
+}
+
+.sort-bin-card.anorganik .sort-bin-name {
+  color: var(--orange-600);
+}
+
+.sort-bin-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gray-500);
+}
+
+.sort-bin-empty {
+  font-size: 0.82rem;
+  color: var(--gray-400);
+  font-style: italic;
+}
+
+/* Items inside the bin as chips */
+.sort-bin-contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sort-bin-item-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-full);
+  padding: 4px 10px 4px 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all 0.18s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.sort-bin-item-chip:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-400);
+  transform: scale(1.04);
+}
+
+.sort-bin-item-chip .chip-undo {
+  font-size: 0.7rem;
+  opacity: 0.4;
+  transition: opacity 0.15s;
+}
+
+.sort-bin-item-chip:hover .chip-undo {
+  opacity: 1;
+  color: var(--orange-500);
+}
+
+.sort-note {
+  margin-top: 32px;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sort-note-icon {
+  font-size: 2rem;
+}
+
+.sort-note-text {
+  flex: 1;
+}
+
+.sort-note-text strong {
+  color: var(--green-800);
+  display: block;
+  margin-bottom: 4px;
+  font-size: 1.05rem;
+}
+
+.sort-note-text p {
+  font-size: 1rem;
+  color: var(--gray-700);
+}
+
+.sort-note-truck {
+  font-size: 3rem;
+}
+
 .contact-info {
   display: flex;
   flex-direction: column;
@@ -1540,10 +1694,30 @@ button {
     margin: 0 auto;
   }
 
-  /* --- Categories --- */
+  /* --- Categories (legacy grid) --- */
   .sorting-grid {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+
+  /* --- Sort Unified Card: bins stack vertically --- */
+  .sort-bins-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sort-bin-card.organik {
+    border-right: none;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  /* --- Sort items: larger tiles on tablet --- */
+  .sort-items-area {
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .sort-item-btn {
+    width: 82px;
   }
 
   /* --- Residu --- */
@@ -1585,7 +1759,6 @@ button {
     flex-direction: column;
   }
 
-
   /* --- Flow Diagram --- */
   .fd-main-row {
     flex-wrap: wrap;
@@ -1620,6 +1793,11 @@ button {
   }
 
   /* --- Footer --- */
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
   .footer-inner {
     flex-direction: column;
     text-align: center;
@@ -1658,18 +1836,47 @@ button {
   .masonry-img-1, .masonry-img-4 { height: 180px; }
   .masonry-img-2, .masonry-img-3 { height: 120px; }
 
-  /* --- Categories Card body --- */
-  .sort-card-body {
+  /* --- Sort Unified: bins stack --- */
+  .sort-bins-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sort-bin-card.organik {
+    border-right: none;
+    border-bottom: 1.5px solid var(--gray-200);
+  }
+
+  /* --- Sort items smaller on phablet --- */
+  .sort-items-area {
+    padding: 16px;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .sort-item-btn {
+    width: 76px;
+  }
+
+  .sort-item-btn .sort-item-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1.25rem;
+  }
+
+  /* --- Unified header padding --- */
+  .sort-unified-header {
+    padding: 16px 20px 14px;
+  }
+
+  /* --- Sort note --- */
+  .sort-note {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
+    gap: 12px;
   }
 
-  .sort-bin-img {
-    width: auto;
-  }
-
-  .sort-items-grid {
-    grid-template-columns: repeat(3, 1fr);
+  .sort-note-truck {
+    display: none;
   }
 
   /* --- Candle Steps (horizontal scroll on tablet) --- */
@@ -1702,6 +1909,12 @@ button {
   .location-map {
     height: 220px;
   }
+
+  /* --- Footer: single column --- */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 /* ========================================= */
@@ -1715,7 +1928,7 @@ button {
   }
 
   .container {
-    padding: 0 16px;
+    padding: 0 14px;
   }
 
   /* --- Navbar --- */
@@ -1761,28 +1974,94 @@ button {
 
   .section-subtitle {
     font-size: 0.9rem;
+    margin-bottom: 28px;
   }
 
-  /* --- Categories --- */
-  .sort-items-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* ────────────────────────────────── */
+  /*  Sort Unified Card – Mobile        */
+  /* ────────────────────────────────── */
+
+  /* Header */
+  .sort-unified-header {
+    padding: 14px 16px 12px;
   }
 
-  .sort-item-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.2rem;
+  .sort-progress-label {
+    font-size: 0.82rem;
   }
 
+  .sort-restore-all-btn {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  /* Items area: 4 columns on mobile so items are compact */
+  .sort-items-area {
+    padding: 14px 12px;
+    gap: 8px;
+    justify-content: flex-start;
+  }
+
+  .sort-item-btn {
+    width: calc(25% - 6px);
+    min-width: 68px;
+    padding: 8px 6px 7px;
+  }
+
+  .sort-item-btn .sort-item-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.15rem;
+  }
+
+  .sort-item-btn .sort-item-text {
+    font-size: 0.65rem;
+  }
+
+  /* Bins: stack vertically */
+  .sort-bins-row {
+    grid-template-columns: 1fr;
+  }
+
+  .sort-bin-card {
+    padding: 16px;
+  }
+
+  .sort-bin-card.organik {
+    border-right: none;
+    border-bottom: 1.5px solid var(--gray-200);
+  }
+
+  .sort-bin-name {
+    font-size: 0.88rem;
+  }
+
+  .sort-bin-item-chip {
+    font-size: 0.72rem;
+    padding: 3px 8px 3px 5px;
+  }
+
+  /* Sort note */
   .sort-note {
     flex-direction: column;
     text-align: center;
-    gap: 12px;
+    gap: 10px;
+    padding: 16px;
   }
 
   .sort-note-truck {
     display: none;
   }
+
+  .sort-note-text strong {
+    font-size: 0.95rem;
+  }
+
+  .sort-note-text p {
+    font-size: 0.88rem;
+  }
+
+  /* ────────────────────────────────── */
 
   /* --- Residu --- */
   .residu-steps-container {
@@ -1819,6 +2098,12 @@ button {
     padding: 20px 16px;
   }
 
+  .candle-banner {
+    border-radius: var(--radius-xl);
+    padding: 14px 20px;
+    font-size: 0.88rem;
+  }
+
   /* --- Video FAQ --- */
   .video-block,
   .faq-block,
@@ -1846,8 +2131,46 @@ button {
     padding: 40px 0 16px;
   }
 
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
   .footer-bottom {
     font-size: 0.7rem;
+  }
+}
+
+/* ========================================= */
+/*  Responsive — 360px (Small Mobile)        */
+/* ========================================= */
+@media (max-width: 360px) {
+
+  .hero-title {
+    font-size: 1.75rem;
+  }
+
+  .sort-item-btn {
+    width: calc(33.333% - 6px);
+    min-width: 0;
+  }
+
+  .sort-item-btn .sort-item-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
+  .sort-item-btn .sort-item-text {
+    font-size: 0.6rem;
+  }
+
+  .sort-unified-header {
+    padding: 12px 12px 10px;
+  }
+
+  .sort-progress-label {
+    font-size: 0.78rem;
   }
 }
 
@@ -2091,11 +2414,8 @@ button {
   font-size: 1.2rem;
 }
 
-@media (max-width: 1024px) {
-  .candle-info-grid {
-    grid-template-columns: 1fr;
-  }
-}
+
+
 
 /* ======================================= */
 /*  Scroll Reveal Animations               */
