@@ -1150,6 +1150,34 @@ button {
   color: var(--green-800);
 }
 
+.sort-score-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-badge {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.score-badge.correct {
+  background: var(--green-100);
+  color: var(--green-900);
+  border: 1px solid var(--green-200);
+}
+
+.score-badge.wrong {
+  background: var(--red-100);
+  color: var(--red-600);
+  border: 1px solid #ffcdd2;
+}
+
 .sort-restore-all-btn {
   background: var(--gray-100);
   border: 1px solid var(--gray-300);
@@ -1226,6 +1254,20 @@ button {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.6);
+}
+
+/* Selected item: pulsing ring */
+.sort-item-btn.selected {
+  border-color: var(--green-500) !important;
+  background: var(--green-50) !important;
+  box-shadow: 0 0 0 3px rgba(66, 130, 63, 0.25), 0 8px 24px rgba(0,0,0,0.14) !important;
+  transform: translateY(-4px) scale(1.06);
+  z-index: 2;
+}
+.sort-item-btn.selected.anorganik {
+  border-color: var(--orange-500) !important;
+  background: var(--orange-50) !important;
+  box-shadow: 0 0 0 3px rgba(239, 108, 0, 0.25), 0 8px 24px rgba(0,0,0,0.14) !important;
 }
 
 .sort-item-btn .sort-item-icon {
@@ -1383,6 +1425,105 @@ button {
 .sort-bin-item-chip:hover .chip-undo {
   opacity: 1;
   color: var(--orange-500);
+}
+
+/* ── Hint Banner ── */
+.sort-hint-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, var(--green-50) 0%, var(--orange-50) 100%);
+  border: 1.5px dashed var(--green-400);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  animation: hint-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { border-color: var(--green-400); box-shadow: 0 0 0 0 rgba(66,130,63,0.15); }
+  50%       { border-color: var(--green-600); box-shadow: 0 0 0 6px rgba(66,130,63,0); }
+}
+
+.sort-hint-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.sort-hint-text {
+  flex: 1;
+  font-size: 0.88rem;
+  color: var(--gray-700);
+  line-height: 1.4;
+}
+
+.sort-hint-cancel {
+  background: none;
+  border: 1px solid var(--gray-300);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 0.75rem;
+  color: var(--gray-500);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.sort-hint-cancel:hover {
+  background: var(--gray-100);
+  color: var(--gray-800);
+}
+
+/* ── Bin interactive states ── */
+.sort-bin-card.bin-clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sort-bin-card.organik-glow {
+  animation: bin-await-organik 1s ease-in-out infinite;
+}
+
+.sort-bin-card.anorganik-glow {
+  animation: bin-await-anorganik 1s ease-in-out infinite;
+}
+
+@keyframes bin-await-organik {
+  0%, 100% { background: var(--green-50);  box-shadow: none; }
+  50%       { background: var(--green-100); box-shadow: inset 0 0 0 2px var(--green-300); }
+}
+
+@keyframes bin-await-anorganik {
+  0%, 100% { background: var(--orange-50);  box-shadow: none; }
+  50%       { background: var(--orange-100); box-shadow: inset 0 0 0 2px var(--orange-300); }
+}
+
+.sort-bin-card.bin-clickable:hover {
+  transform: scale(1.012);
+  box-shadow: var(--shadow-md);
+}
+
+/* Wrong bin flash */
+@keyframes wrong-flash {
+  0%   { background: #ffebee; }
+  20%  { background: #ffcdd2; }
+  50%  { background: #ef9a9a; }
+  80%  { background: #ffcdd2; }
+  100% { background: #ffebee; }
+}
+
+.sort-bin-card.bin-wrong {
+  animation: wrong-flash 0.7s ease !important;
+}
+
+/* Hint label shown inside bin when item is selected */
+.sort-bin-hint {
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 2px;
 }
 
 .sort-note {
@@ -1790,6 +1931,7 @@ button {
   /* --- Candle Steps --- */
   .candle-info-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
   /* --- Footer --- */
@@ -1981,9 +2123,43 @@ button {
   /*  Sort Unified Card – Mobile        */
   /* ────────────────────────────────── */
 
+  /* Hint banner mobile */
+  .sort-hint-banner {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .sort-hint-icon {
+    font-size: 1.3rem;
+  }
+
+  .sort-hint-text {
+    font-size: 0.8rem;
+  }
+
   /* Header */
   .sort-unified-header {
     padding: 14px 16px 12px;
+  }
+
+  .sort-progress-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .sort-score-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
+  .score-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
   }
 
   .sort-progress-label {
@@ -2094,8 +2270,15 @@ button {
     font-size: 2rem;
   }
 
+  .candle-info-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
   .candle-info-card {
-    padding: 20px 16px;
+    padding: 18px 14px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .candle-banner {

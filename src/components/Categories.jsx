@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import useScrollReveal from '../hooks/useScrollReveal';
 
-const TrashIcon = ({ color = 'currentColor', size = 72, shake = false }) => (
+const TrashIcon = ({ color = 'currentColor', size = 72, shake = false, glow = false }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -14,8 +14,8 @@ const TrashIcon = ({ color = 'currentColor', size = 72, shake = false }) => (
     strokeLinejoin="round"
     style={{
       transition: 'all 0.2s',
-      filter: shake ? `drop-shadow(0 0 8px ${color}88)` : 'none',
-      transform: shake ? 'scale(1.12)' : 'scale(1)',
+      filter: (shake || glow) ? `drop-shadow(0 0 10px ${color}bb)` : 'none',
+      transform: shake ? 'scale(1.15)' : 'scale(1)',
     }}
   >
     <path d="M3 6h18" />
@@ -72,25 +72,47 @@ function shuffle(arr) {
 }
 
 const ALL_ITEMS = [
-  { id: 0, icon: '🍛', label: 'Sisa Makanan', type: 'organik' },
-  { id: 1, icon: '🍂', label: 'Daun', type: 'organik' },
-  { id: 2, icon: '🍎', label: 'Buah', type: 'organik' },
-  { id: 3, icon: '🥬', label: 'Sayur', type: 'organik' },
-  { id: 4, icon: '☕', label: 'Ampas Kopi', type: 'organik' },
-  { id: 5, icon: '🪵', label: 'Ranting', type: 'organik' },
-  { id: 6, icon: '🧴', label: 'Botol Plastik', type: 'anorganik' },
-  { id: 7, icon: '🥫', label: 'Kaleng', type: 'anorganik' },
-  { id: 8, icon: '📄', label: 'Kertas', type: 'anorganik' },
-  { id: 9, icon: '📦', label: 'Kardus', type: 'anorganik' },
-  { id: 10, icon: '🛍️', label: 'Plastik', type: 'anorganik' },
-  { id: 11, icon: '🫙', label: 'Kaca', type: 'anorganik' },
-  { id: 12, icon: '🩲', label: 'Pampers', type: 'anorganik' },
-  { id: 13, icon: '🩸', label: 'Pembalut', type: 'anorganik' },
-  { id: 14, icon: '😷', label: 'Masker', type: 'anorganik' },
-  { id: 15, icon: '🧻', label: 'Tisu Bekas', type: 'anorganik' },
-  { id: 16, icon: '🥡', label: 'Styrofoam', type: 'anorganik' },
-  { id: 17, icon: '📦', label: 'Kemasan', type: 'anorganik' },
+  // Organik (15)
+  { id: 0,  icon: '🍛', label: 'Sisa Makanan',   type: 'organik' },
+  { id: 1,  icon: '🍂', label: 'Daun',           type: 'organik' },
+  { id: 2,  icon: '🍎', label: 'Buah',           type: 'organik' },
+  { id: 3,  icon: '🥬', label: 'Sayur',          type: 'organik' },
+  { id: 4,  icon: '☕', label: 'Ampas Kopi',     type: 'organik' },
+  { id: 5,  icon: '🪵', label: 'Ranting',        type: 'organik' },
+  { id: 6,  icon: '🌾', label: 'Jerami',         type: 'organik' },
+  { id: 7,  icon: '🌿', label: 'Rumput',         type: 'organik' },
+  { id: 8,  icon: '🥚', label: 'Cangkang Telur', type: 'organik' },
+  { id: 9,  icon: '🌸', label: 'Bunga',          type: 'organik' },
+  { id: 10, icon: '🍃', label: 'Kompos',         type: 'organik' },
+  { id: 11, icon: '🫖', label: 'Ampas Teh',      type: 'organik' },
+  { id: 12, icon: '🥜', label: 'Kulit Kacang',   type: 'organik' },
+  { id: 13, icon: '🌽', label: 'Tongkol Jagung', type: 'organik' },
+  { id: 14, icon: '🪴', label: 'Serbuk Kayu',    type: 'organik' },
+  // Anorganik (20)
+  { id: 15, icon: '🧴', label: 'Botol Plastik',  type: 'anorganik' },
+  { id: 16, icon: '🥫', label: 'Kaleng',         type: 'anorganik' },
+  { id: 17, icon: '📄', label: 'Kertas',         type: 'anorganik' },
+  { id: 18, icon: '📦', label: 'Kardus',         type: 'anorganik' },
+  { id: 19, icon: '🛍️', label: 'Plastik',        type: 'anorganik' },
+  { id: 20, icon: '🫙', label: 'Kaca',           type: 'anorganik' },
+  { id: 21, icon: '🩲', label: 'Pampers',        type: 'anorganik' },
+  { id: 22, icon: '🩸', label: 'Pembalut',       type: 'anorganik' },
+  { id: 23, icon: '😷', label: 'Masker',         type: 'anorganik' },
+  { id: 24, icon: '🧻', label: 'Tisu Bekas',     type: 'anorganik' },
+  { id: 25, icon: '🥡', label: 'Styrofoam',      type: 'anorganik' },
+  { id: 26, icon: '📦', label: 'Kemasan',        type: 'anorganik' },
+  { id: 27, icon: '💡', label: 'Lampu Bekas',    type: 'anorganik' },
+  { id: 28, icon: '🔋', label: 'Baterai',        type: 'anorganik' },
+  { id: 29, icon: '👟', label: 'Sandal Bekas',   type: 'anorganik' },
+  { id: 30, icon: '🧃', label: 'Kotak Minuman',  type: 'anorganik' },
+  { id: 31, icon: '🍶', label: 'Botol Kaca',     type: 'anorganik' },
+  { id: 32, icon: '🔩', label: 'Logam',          type: 'anorganik' },
+  { id: 33, icon: '🧷', label: 'Kawat',          type: 'anorganik' },
+  { id: 34, icon: '📰', label: 'Koran',          type: 'anorganik' },
 ];
+
+// Wrong bin flash state
+const WRONG_FLASH_MS = 700;
 
 export default function Categories() {
   const ref = useScrollReveal();
@@ -98,56 +120,107 @@ export default function Categories() {
   const shuffledItems = useMemo(() => shuffle(ALL_ITEMS), []);
 
   const [flyingItems, setFlyingItems] = useState([]);
-  const [sortedIds, setSortedIds] = useState(new Set()); // item ids sorted into bins
+  const [sortedIds, setSortedIds] = useState(new Set());
 
-  // Per-bin tracking
-  const [organikBin, setOrganikBin] = useState([]); // array of item ids
+  // Score tracking
+  const [scoreCorrect, setScoreCorrect] = useState(0);
+  const [scoreWrong, setScoreWrong]     = useState(0);
+
+  const [organikBin, setOrganikBin]     = useState([]);
   const [anorganikBin, setAnorganikBin] = useState([]);
 
-  // Shake feedback when item lands
-  const [organikShake, setOrganikShake] = useState(false);
+  const [organikShake, setOrganikShake]     = useState(false);
   const [anorganikShake, setAnorganikShake] = useState(false);
 
-  const organikBinRef = useRef(null);
+  // Highlight bins when an item is selected
+  const [organikGlow, setOrganikGlow]     = useState(false);
+  const [anorganikGlow, setAnorganikGlow] = useState(false);
+
+  // Wrong-bin flash
+  const [wrongBin, setWrongBin] = useState(null); // 'organik' | 'anorganik' | null
+
+  // Selected item waiting to be placed
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  const organikBinRef   = useRef(null);
   const anorganikBinRef = useRef(null);
+  const itemRefs        = useRef({}); // keyed by item.id
 
-  const handleSort = (item, e) => {
-    if (sortedIds.has(item.id)) return;
+  // When user selects an item, highlight bins
+  useEffect(() => {
+    if (selectedItem) {
+      setOrganikGlow(true);
+      setAnorganikGlow(true);
+    } else {
+      setOrganikGlow(false);
+      setAnorganikGlow(false);
+    }
+  }, [selectedItem]);
 
-    const el = e.currentTarget;
+  const triggerFly = (item, binRef) => {
+    const el = itemRefs.current[item.id];
+    if (!el || !binRef.current) return;
     const itemRect = el.getBoundingClientRect();
-    const binRef = item.type === 'organik' ? organikBinRef.current : anorganikBinRef.current;
-    if (!binRef) return;
-    const binRect = binRef.getBoundingClientRect();
+    const binRect  = binRef.current.getBoundingClientRect();
 
     const flyItem = {
       id: Date.now() + Math.random(),
       icon: item.icon,
-      startX: itemRect.left + itemRect.width / 2 - 22,
-      startY: itemRect.top + itemRect.height / 2 - 22,
-      endX: binRect.left + binRect.width / 2 - 22,
-      endY: binRect.top + binRect.height / 2 - 22,
+      startX: itemRect.left + itemRect.width  / 2 - 22,
+      startY: itemRect.top  + itemRect.height / 2 - 22,
+      endX:   binRect.left  + binRect.width   / 2 - 22,
+      endY:   binRect.top   + binRect.height  / 2 - 22,
     };
 
-    setSortedIds(prev => new Set([...prev, item.id]));
     setFlyingItems(prev => [...prev, flyItem]);
-
-    // Animate bin
-    setTimeout(() => {
-      if (item.type === 'organik') {
-        setOrganikBin(prev => [...prev, item.id]);
-        setOrganikShake(true);
-        setTimeout(() => setOrganikShake(false), 400);
-      } else {
-        setAnorganikBin(prev => [...prev, item.id]);
-        setAnorganikShake(true);
-        setTimeout(() => setAnorganikShake(false), 400);
-      }
-    }, 520);
-
     setTimeout(() => {
       setFlyingItems(prev => prev.filter(f => f.id !== flyItem.id));
     }, 620);
+  };
+
+  // Commit item into bin (correct placement)
+  const commitToOrganik = (item) => {
+    triggerFly(item, organikBinRef);
+    setSortedIds(prev => new Set([...prev, item.id]));
+    setTimeout(() => {
+      setOrganikBin(prev => [...prev, item.id]);
+      setOrganikShake(true);
+      setTimeout(() => setOrganikShake(false), 400);
+    }, 520);
+  };
+
+  const commitToAnorganik = (item) => {
+    triggerFly(item, anorganikBinRef);
+    setSortedIds(prev => new Set([...prev, item.id]));
+    setTimeout(() => {
+      setAnorganikBin(prev => [...prev, item.id]);
+      setAnorganikShake(true);
+      setTimeout(() => setAnorganikShake(false), 400);
+    }, 520);
+  };
+
+  // Click on item card: select it
+  const handleSelectItem = (item) => {
+    if (sortedIds.has(item.id)) return;
+    setSelectedItem(prev => (prev && prev.id === item.id ? null : item));
+  };
+
+  // Click on a bin
+  const handleBinClick = (binType) => {
+    if (!selectedItem) return;
+
+    if (selectedItem.type === binType) {
+      // Correct!
+      setScoreCorrect(prev => prev + 1);
+      if (binType === 'organik') commitToOrganik(selectedItem);
+      else commitToAnorganik(selectedItem);
+      setSelectedItem(null);
+    } else {
+      // Wrong bin — increment wrong score & flash red
+      setScoreWrong(prev => prev + 1);
+      setWrongBin(binType);
+      setTimeout(() => setWrongBin(null), WRONG_FLASH_MS);
+    }
   };
 
   const handleRestore = (itemId, type) => {
@@ -156,44 +229,63 @@ export default function Categories() {
       next.delete(itemId);
       return next;
     });
-    if (type === 'organik') {
-      setOrganikBin(prev => prev.filter(id => id !== itemId));
-    } else {
-      setAnorganikBin(prev => prev.filter(id => id !== itemId));
-    }
+    if (type === 'organik') setOrganikBin(prev => prev.filter(id => id !== itemId));
+    else setAnorganikBin(prev => prev.filter(id => id !== itemId));
+    setScoreCorrect(prev => Math.max(0, prev - 1));
   };
 
   const handleRestoreAll = () => {
     setSortedIds(new Set());
     setOrganikBin([]);
     setAnorganikBin([]);
+    setSelectedItem(null);
+    setScoreCorrect(0);
+    setScoreWrong(0);
   };
 
   const totalSorted = sortedIds.size;
-  const total = ALL_ITEMS.length;
-  const progress = Math.round((totalSorted / total) * 100);
-  const allDone = totalSorted === total;
+  const total       = ALL_ITEMS.length;
+  const progress    = Math.round((totalSorted / total) * 100);
+  const allDone     = totalSorted === total;
 
   return (
     <section className="sorting" id="cara-memilah" ref={ref}>
       <div className="container">
         <h2 className="section-title reveal">CARA MEMILAH DI RUMAH</h2>
-        <p className="section-subtitle reveal reveal-delay-1">Klik setiap sampah untuk memilahnya ke tempat yang benar!</p>
+        <p className="section-subtitle reveal reveal-delay-1">
+          Pilih sampah lalu klik tempat sampah yang sesuai!
+        </p>
+
+        {/* Instruction hint */}
+        {selectedItem && (
+          <div className="sort-hint-banner">
+            <span className="sort-hint-icon">{selectedItem.icon}</span>
+            <span className="sort-hint-text">
+              <strong>{selectedItem.label}</strong> dipilih — klik tempat sampah yang sesuai!
+            </span>
+            <button className="sort-hint-cancel" onClick={() => setSelectedItem(null)}>✕</button>
+          </div>
+        )}
 
         {/* Single unified card */}
         <div className="sort-unified-card reveal">
 
-          {/* Header progress */}
+          {/* Header progress & Score */}
           <div className="sort-unified-header">
             <div className="sort-progress-info">
               <span className="sort-progress-label">
                 {allDone ? '🎉 Semua sampah berhasil dipilah!' : `Sudah dipilah: ${totalSorted} / ${total}`}
               </span>
-              {totalSorted > 0 && (
-                <button className="sort-restore-all-btn" onClick={handleRestoreAll} title="Pulihkan semua">
-                  🔄 Reset
-                </button>
-              )}
+              
+              <div className="sort-score-container">
+                <span className="score-badge correct">🎯 Benar: <strong>{scoreCorrect}</strong></span>
+                <span className="score-badge wrong">❌ Salah: <strong>{scoreWrong}</strong></span>
+                {(totalSorted > 0 || scoreWrong > 0) && (
+                  <button className="sort-restore-all-btn" onClick={handleRestoreAll} title="Pulihkan semua">
+                    🔄 Reset
+                  </button>
+                )}
+              </div>
             </div>
             <div className="sort-progress-bar-track">
               <div className="sort-progress-bar-fill" style={{ width: `${progress}%` }} />
@@ -203,22 +295,19 @@ export default function Categories() {
           {/* Trash items area */}
           <div className="sort-items-area">
             {shuffledItems.map(item => {
-              const thrown = sortedIds.has(item.id);
+              const thrown   = sortedIds.has(item.id);
+              const isSelected = selectedItem && selectedItem.id === item.id;
               return (
                 <button
                   key={item.id}
-                  className={`sort-item-btn ${thrown ? 'thrown' : ''} ${item.type}`}
-                  onClick={(e) => handleSort(item, e)}
+                  ref={el => { itemRefs.current[item.id] = el; }}
+                  className={`sort-item-btn ${thrown ? 'thrown' : ''} ${item.type} ${isSelected ? 'selected' : ''}`}
+                  onClick={() => handleSelectItem(item)}
                   disabled={thrown}
-                  title={thrown ? 'Sudah dipilah' : `Klik untuk memilah ke ${item.type === 'organik' ? 'tempat hijau' : 'tempat oren'}`}
+                  title={thrown ? 'Sudah dipilah' : 'Klik untuk memilih'}
                 >
                   <div className="sort-item-icon">{item.icon}</div>
                   <span className="sort-item-text">{item.label}</span>
-                  {!thrown && (
-                    <span className={`sort-item-badge ${item.type}`}>
-                      {item.type === 'organik' ? '🌿' : '♻️'}
-                    </span>
-                  )}
                 </button>
               );
             })}
@@ -227,17 +316,29 @@ export default function Categories() {
           {/* Bins row */}
           <div className="sort-bins-row">
             {/* Organik bin */}
-            <div className={`sort-bin-card organik ${organikShake ? 'bin-shake' : ''}`}>
+            <div
+              className={[
+                'sort-bin-card organik',
+                organikShake ? 'bin-shake' : '',
+                organikGlow  ? 'bin-glow organik-glow' : '',
+                selectedItem ? 'bin-clickable' : '',
+                wrongBin === 'organik' ? 'bin-wrong' : '',
+              ].join(' ')}
+              onClick={() => handleBinClick('organik')}
+              role={selectedItem ? 'button' : undefined}
+              tabIndex={selectedItem ? 0 : undefined}
+              onKeyDown={e => e.key === 'Enter' && handleBinClick('organik')}
+              title={selectedItem ? 'Tempatkan ke Organik' : ''}
+            >
               <div className="sort-bin-top">
                 <div ref={organikBinRef} className="sort-bin-icon-wrap">
-                  <TrashIcon color="#42823f" size={64} shake={organikShake} />
+                  <TrashIcon color="#42823f" size={64} shake={organikShake} glow={organikGlow} />
                 </div>
                 <div className="sort-bin-info">
                   <span className="sort-bin-name">🌿 ORGANIK</span>
                   <span className="sort-bin-count">{organikBin.length} item</span>
                 </div>
               </div>
-              {/* Items in bin */}
               {organikBin.length > 0 && (
                 <div className="sort-bin-contents">
                   {organikBin.map(id => {
@@ -246,7 +347,7 @@ export default function Categories() {
                       <button
                         key={id}
                         className="sort-bin-item-chip"
-                        onClick={() => handleRestore(id, 'organik')}
+                        onClick={e => { e.stopPropagation(); handleRestore(id, 'organik'); }}
                         title="Klik untuk pulihkan"
                       >
                         {item.icon} <span>{item.label}</span> <span className="chip-undo">↩</span>
@@ -261,10 +362,23 @@ export default function Categories() {
             </div>
 
             {/* Anorganik bin */}
-            <div className={`sort-bin-card anorganik ${anorganikShake ? 'bin-shake' : ''}`}>
+            <div
+              className={[
+                'sort-bin-card anorganik',
+                anorganikShake ? 'bin-shake' : '',
+                anorganikGlow  ? 'bin-glow anorganik-glow' : '',
+                selectedItem   ? 'bin-clickable' : '',
+                wrongBin === 'anorganik' ? 'bin-wrong' : '',
+              ].join(' ')}
+              onClick={() => handleBinClick('anorganik')}
+              role={selectedItem ? 'button' : undefined}
+              tabIndex={selectedItem ? 0 : undefined}
+              onKeyDown={e => e.key === 'Enter' && handleBinClick('anorganik')}
+              title={selectedItem ? 'Tempatkan ke Anorganik' : ''}
+            >
               <div className="sort-bin-top">
                 <div ref={anorganikBinRef} className="sort-bin-icon-wrap">
-                  <TrashIcon color="#ef6c00" size={64} shake={anorganikShake} />
+                  <TrashIcon color="#ef6c00" size={64} shake={anorganikShake} glow={anorganikGlow} />
                 </div>
                 <div className="sort-bin-info">
                   <span className="sort-bin-name">♻️ ANORGANIK</span>
@@ -279,7 +393,7 @@ export default function Categories() {
                       <button
                         key={id}
                         className="sort-bin-item-chip"
-                        onClick={() => handleRestore(id, 'anorganik')}
+                        onClick={e => { e.stopPropagation(); handleRestore(id, 'anorganik'); }}
                         title="Klik untuk pulihkan"
                       >
                         {item.icon} <span>{item.label}</span> <span className="chip-undo">↩</span>
