@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import useScrollReveal from '../hooks/useScrollReveal'
+import lilinVideo from '../assets/video/video_lilinaromaterapi.mov'
 
 export default function VideoFaqFeedback() {
   const ref = useScrollReveal()
   const [openFaq, setOpenFaq] = useState(null)
 
   const videos = [
-    { title: 'Cara Memilah Sampah', thumb: '/tps-desa-barang.jpeg' },
-    { title: 'Mesin Press Plastik', thumb: '/mesin-press.png' },
-    { title: 'Budidaya Maggot', thumb: '/budidaya-maggot.png' },
+    { title: 'Pembuatan Lilin Aromaterapi', src: lilinVideo },
   ]
 
   const faqs = [
@@ -43,20 +42,28 @@ export default function VideoFaqFeedback() {
             <h3>🎬 VIDEO EDUKASI</h3>
             <div className="video-grid">
               {videos.map((video, index) => (
-                <div key={index} className="video-card">
-                  <img
-                    className="video-card-thumb"
-                    src={video.thumb}
-                    alt={video.title}
-                  />
-                  <div className="video-card-play">▶</div>
-                  <div className="video-card-title">{video.title}</div>
+                <div key={index} className={`video-card ${video.src ? 'video-player-card' : ''}`}>
+                  {video.src ? (
+                    <video
+                      className="video-card-player"
+                      src={video.src}
+                      controls
+                      preload="metadata"
+                    />
+                  ) : (
+                    <>
+                      <img
+                        className="video-card-thumb"
+                        src={video.thumb}
+                        alt={video.title}
+                      />
+                      <div className="video-card-play">▶</div>
+                    </>
+                  )}
+                  <div className="video-card-title" style={video.src ? { padding: '12px', textAlign: 'center', width: '100%' } : {}}>{video.title}</div>
                 </div>
               ))}
             </div>
-            <button className="video-all-btn">
-              Lihat Semua Video →
-            </button>
           </div>
 
           {/* FAQ Block */}

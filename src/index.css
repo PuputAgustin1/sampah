@@ -876,6 +876,21 @@ button {
   border-color: var(--green-300);
 }
 
+.video-player-card {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+}
+
+.video-card-player {
+  width: 100%;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  background: #000;
+  display: block;
+  max-height: 250px;
+}
+
 .video-card-thumb {
   width: 80px;
   height: 50px;
@@ -1238,36 +1253,32 @@ button {
 .sort-item-btn:hover:not(:disabled) {
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-}
-
-.sort-item-btn.organik:hover:not(:disabled) {
-  border-color: var(--green-300);
+  border-color: var(--green-400);
   background: var(--green-50);
 }
 
-.sort-item-btn.anorganik:hover:not(:disabled) {
-  border-color: var(--orange-300);
-  background: var(--orange-50);
+.sort-empty-complete {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 36px 20px;
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--green-800);
+  background: var(--green-50);
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--green-300);
 }
 
-.sort-item-btn.thrown {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(0.6);
-}
-
-/* Selected item: pulsing ring */
+/* Selected item: uniform highlight ring */
 .sort-item-btn.selected {
-  border-color: var(--green-500) !important;
+  border-color: var(--green-600) !important;
   background: var(--green-50) !important;
-  box-shadow: 0 0 0 3px rgba(66, 130, 63, 0.25), 0 8px 24px rgba(0,0,0,0.14) !important;
+  box-shadow: 0 0 0 3px rgba(45, 106, 43, 0.25), 0 8px 24px rgba(0,0,0,0.14) !important;
   transform: translateY(-4px) scale(1.06);
   z-index: 2;
-}
-.sort-item-btn.selected.anorganik {
-  border-color: var(--orange-500) !important;
-  background: var(--orange-50) !important;
-  box-shadow: 0 0 0 3px rgba(239, 108, 0, 0.25), 0 8px 24px rgba(0,0,0,0.14) !important;
 }
 
 .sort-item-btn .sort-item-icon {
@@ -1752,6 +1763,247 @@ button {
   background: var(--green-50);
 }
 
+/* ========================= */
+/*  Lilin Aromaterapi Section*/
+/* ========================= */
+.candle-section {
+  padding: var(--section-padding);
+  background: var(--green-bg);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.candle-steps-container {
+  margin-bottom: 48px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.candle-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  position: relative;
+  min-width: 900px;
+}
+
+.candle-step-card {
+  background: var(--white);
+  border: 1px solid var(--green-100);
+  border-radius: var(--radius-lg);
+  padding: 24px 16px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.candle-step-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--green-300);
+}
+
+.candle-step-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--green-700);
+  color: var(--white);
+  font-weight: 800;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 10px rgba(33, 78, 32, 0.25);
+}
+
+.candle-step-icon {
+  font-size: 2.4rem;
+  margin-bottom: 12px;
+}
+
+.candle-step-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--green-900);
+  margin-bottom: 10px;
+  line-height: 1.3;
+}
+
+.candle-step-desc {
+  font-size: 0.85rem;
+  color: var(--gray-700);
+  line-height: 1.45;
+}
+
+.candle-step-arrow {
+  position: absolute;
+  right: -14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  font-size: 1.2rem;
+  color: var(--green-500);
+  background: var(--white);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Info Grid (3 columns) */
+.candle-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+.candle-info-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--green-100);
+  display: flex;
+  flex-direction: column;
+}
+
+.candle-info-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--green-50);
+}
+
+.candle-info-header-icon {
+  font-size: 1.4rem;
+}
+
+.candle-info-header h3 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--green-800);
+  letter-spacing: 0.5px;
+}
+
+/* Tips List */
+.candle-tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.candle-tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--gray-800);
+  line-height: 1.4;
+}
+
+.candle-tips-list .check-icon {
+  color: var(--green-600);
+  font-weight: bold;
+  font-size: 0.95rem;
+  margin-top: 1px;
+}
+
+/* Measurements Table */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.candle-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.candle-table th {
+  background: var(--green-50);
+  color: var(--green-800);
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 6px 6px 0 0;
+}
+
+.candle-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--gray-100);
+  color: var(--gray-800);
+}
+
+.candle-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.candle-table tbody tr:nth-child(even) {
+  background: rgba(244, 249, 244, 0.5);
+}
+
+/* Benefits List */
+.candle-benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.candle-benefits-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  color: var(--gray-800);
+  line-height: 1.4;
+}
+
+.benefit-icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--green-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* Bottom Banner */
+.candle-banner {
+  background: linear-gradient(135deg, var(--green-800) 0%, var(--green-700) 100%);
+  color: var(--white);
+  border-radius: var(--radius-full);
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: var(--shadow-md);
+}
+
+.banner-leaf {
+  font-size: 1.2rem;
+}
+
+
 /* ========================================= */
 /*  Responsive — 1024px (Tablet)             */
 /* ========================================= */
@@ -1928,10 +2180,23 @@ button {
     gap: 24px;
   }
 
-  /* --- Candle Steps --- */
+  /* --- Candle Info Cards --- */
   .candle-info-grid {
     grid-template-columns: 1fr;
     gap: 16px;
+    width: 100%;
+  }
+
+  .candle-info-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
   }
 
   /* --- Footer --- */
@@ -2030,6 +2295,29 @@ button {
 
   .candle-steps-grid {
     min-width: 760px;
+  }
+
+  /* --- Candle Info Cards (stack vertically on tablet) --- */
+  .candle-info-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .candle-info-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 20px 16px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .candle-table {
+    min-width: 260px;
   }
 
   /* --- Flow branches stacked --- */
@@ -2262,29 +2550,61 @@ button {
   }
 
   /* --- Candle --- */
+  .candle-section {
+    overflow-x: hidden;
+  }
+
+  .candle-steps-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .candle-step-card {
-    padding: 18px 12px;
+    padding: 16px 10px;
   }
 
   .candle-step-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .candle-info-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 14px;
+    width: 100%;
   }
 
   .candle-info-card {
-    padding: 18px 14px;
+    padding: 16px 14px;
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .candle-table {
+    font-size: 0.8rem;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .candle-table td,
+  .candle-table th {
+    padding: 8px 8px;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  .candle-tips-list li,
+  .candle-benefits-list li {
+    font-size: 0.82rem;
   }
 
   .candle-banner {
     border-radius: var(--radius-xl);
-    padding: 14px 20px;
-    font-size: 0.88rem;
+    padding: 14px 16px;
+    font-size: 0.82rem;
+    flex-wrap: wrap;
   }
 
   /* --- Video FAQ --- */
@@ -2358,244 +2678,7 @@ button {
 }
 
 
-/* ========================= */
-/*  Lilin Aromaterapi Section*/
-/* ========================= */
-.candle-section {
-  padding: var(--section-padding);
-  background: var(--green-bg);
-  position: relative;
-}
 
-.candle-steps-container {
-  margin-bottom: 48px;
-  overflow-x: auto;
-  padding-bottom: 12px;
-}
-
-.candle-steps-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
-  position: relative;
-  min-width: 900px;
-}
-
-.candle-step-card {
-  background: var(--white);
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-lg);
-  padding: 24px 16px;
-  text-align: center;
-  position: relative;
-  box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.candle-step-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--green-300);
-}
-
-.candle-step-badge {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--green-700);
-  color: var(--white);
-  font-weight: 800;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 14px;
-  box-shadow: 0 4px 10px rgba(33, 78, 32, 0.25);
-}
-
-.candle-step-icon {
-  font-size: 2.4rem;
-  margin-bottom: 12px;
-}
-
-.candle-step-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--green-900);
-  margin-bottom: 10px;
-  line-height: 1.3;
-}
-
-.candle-step-desc {
-  font-size: 0.85rem;
-  color: var(--gray-700);
-  line-height: 1.45;
-}
-
-.candle-step-arrow {
-  position: absolute;
-  right: -14px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  font-size: 1.2rem;
-  color: var(--green-500);
-  background: var(--white);
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: var(--shadow-sm);
-}
-
-/* Info Grid (3 columns) */
-.candle-info-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 36px;
-}
-
-.candle-info-card {
-  background: var(--white);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid var(--green-100);
-  display: flex;
-  flex-direction: column;
-}
-
-.candle-info-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid var(--green-50);
-}
-
-.candle-info-header-icon {
-  font-size: 1.4rem;
-}
-
-.candle-info-header h3 {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--green-800);
-  letter-spacing: 0.5px;
-}
-
-/* Tips List */
-.candle-tips-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.candle-tips-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 0.88rem;
-  color: var(--gray-800);
-  line-height: 1.4;
-}
-
-.candle-tips-list .check-icon {
-  color: var(--green-600);
-  font-weight: bold;
-  font-size: 0.95rem;
-  margin-top: 1px;
-}
-
-/* Measurements Table */
-.table-responsive {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.candle-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.88rem;
-}
-
-.candle-table th {
-  background: var(--green-50);
-  color: var(--green-800);
-  font-weight: 700;
-  text-align: left;
-  padding: 10px 12px;
-  border-radius: 6px 6px 0 0;
-}
-
-.candle-table td {
-  padding: 10px 12px;
-  border-bottom: 1px solid var(--gray-100);
-  color: var(--gray-800);
-}
-
-.candle-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-.candle-table tbody tr:nth-child(even) {
-  background: rgba(244, 249, 244, 0.5);
-}
-
-/* Benefits List */
-.candle-benefits-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.candle-benefits-list li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.88rem;
-  color: var(--gray-800);
-  line-height: 1.4;
-}
-
-.benefit-icon-badge {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--green-50);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-  flex-shrink: 0;
-}
-
-/* Bottom Banner */
-.candle-banner {
-  background: linear-gradient(135deg, var(--green-800) 0%, var(--green-700) 100%);
-  color: var(--white);
-  border-radius: var(--radius-full);
-  padding: 16px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 0.95rem;
-  box-shadow: var(--shadow-md);
-}
-
-.banner-leaf {
-  font-size: 1.2rem;
-}
 
 
 

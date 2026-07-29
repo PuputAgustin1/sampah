@@ -19,7 +19,7 @@ export default function LocationContact() {
 
             <div className="location-map">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7916.316900313203!2d110.08363009049292!3d-7.222760877394004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7071265aebbdf1%3A0x3dc57ee5f4627f41!2sBarang%2C%20Jumo%2C%20Temanggung%20Regency%2C%20Central%20Java!5e0!3m2!1sen!2sid!4v1784798449429!5m2!1sen!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d124053.39572459072!2d110.11268736990067!3d-7.226504274792954!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e707100602a80cb%3A0xd6238fa83c8c6763!2sTPS3R%20BARANG%20KEC.JUMO!5e0!3m2!1sen!2sid!4v1785344121422!5m2!1sen!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

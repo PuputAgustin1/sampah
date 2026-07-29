@@ -294,23 +294,29 @@ export default function Categories() {
 
           {/* Trash items area */}
           <div className="sort-items-area">
-            {shuffledItems.map(item => {
-              const thrown   = sortedIds.has(item.id);
-              const isSelected = selectedItem && selectedItem.id === item.id;
-              return (
-                <button
-                  key={item.id}
-                  ref={el => { itemRefs.current[item.id] = el; }}
-                  className={`sort-item-btn ${thrown ? 'thrown' : ''} ${item.type} ${isSelected ? 'selected' : ''}`}
-                  onClick={() => handleSelectItem(item)}
-                  disabled={thrown}
-                  title={thrown ? 'Sudah dipilah' : 'Klik untuk memilih'}
-                >
-                  <div className="sort-item-icon">{item.icon}</div>
-                  <span className="sort-item-text">{item.label}</span>
-                </button>
-              );
-            })}
+            {allDone ? (
+              <div className="sort-empty-complete">
+                <span>🎉 Luar biasa! Semua {total} sampah telah berhasil dipilah dengan benar!</span>
+              </div>
+            ) : (
+              shuffledItems
+                .filter(item => !sortedIds.has(item.id))
+                .map(item => {
+                  const isSelected = selectedItem && selectedItem.id === item.id;
+                  return (
+                    <button
+                      key={item.id}
+                      ref={el => { itemRefs.current[item.id] = el; }}
+                      className={`sort-item-btn ${isSelected ? 'selected' : ''}`}
+                      onClick={() => handleSelectItem(item)}
+                      title="Klik untuk memilih"
+                    >
+                      <div className="sort-item-icon">{item.icon}</div>
+                      <span className="sort-item-text">{item.label}</span>
+                    </button>
+                  );
+                })
+            )}
           </div>
 
           {/* Bins row */}

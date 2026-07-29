@@ -25,8 +25,7 @@ export default function Footer() {
         <div className="footer-divider"></div>
 
         <div className="footer-bottom">
-          <span>SIPILAH - Sistem Informasi Pilah Sampah</span>
-          <span>Desa Barang, Kec. Jumo, Kab. Temanggung</span>
+          <span>SIPILAH - Sistem Informasi Pilah Sampah Desa Barang, Kec. Jumo, Kab. Temanggung</span>
         </div>
       </div>
     </footer>
