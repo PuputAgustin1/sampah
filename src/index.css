@@ -34,6 +34,13 @@
   --red-100: #ffcdd2;
   --red-50: #ffebee;
 
+  /* Accent Colors (Blue for Selected State) */
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-100: #dbeafe;
+  --blue-50: #eff6ff;
+
   /* Neutrals */
   --white: #ffffff;
   --gray-50: #fafafa;
@@ -1253,8 +1260,8 @@ button {
 .sort-item-btn:hover:not(:disabled) {
   transform: translateY(-4px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-  border-color: var(--green-400);
-  background: var(--green-50);
+  border-color: var(--blue-400);
+  background: var(--blue-50);
 }
 
 .sort-empty-complete {
@@ -1274,9 +1281,9 @@ button {
 
 /* Selected item: uniform highlight ring */
 .sort-item-btn.selected {
-  border-color: var(--green-600) !important;
-  background: var(--green-50) !important;
-  box-shadow: 0 0 0 3px rgba(45, 106, 43, 0.25), 0 8px 24px rgba(0,0,0,0.14) !important;
+  border-color: var(--blue-600) !important;
+  background: var(--blue-50) !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25), 0 8px 24px rgba(0,0,0,0.14) !important;
   transform: translateY(-4px) scale(1.06);
   z-index: 2;
 }
