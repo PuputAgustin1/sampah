@@ -9,14 +9,13 @@ export default function Navbar() {
   const clickTimeout = useRef(null)
 
   const links = [
-    { label: 'Beranda',         href: '#beranda',          id: 'beranda' },
-    { label: 'Cara Memilah',    href: '#cara-memilah',     id: 'cara-memilah' },
-    { label: 'Alur Pengelolaan', href: '#alur',            id: 'alur' },
+    { label: 'Beranda', href: '#beranda', id: 'beranda' },
+    { label: 'Cara Memilah', href: '#cara-memilah', id: 'cara-memilah' },
+    { label: 'Alur Pengelolaan', href: '#alur', id: 'alur' },
     { label: 'Lilin Aromaterapi', href: '#lilin-aromaterapi', id: 'lilin-aromaterapi' },
-    { label: 'Video',           href: '#video',            id: 'video' },
-    { label: 'Lokasi',          href: '#lokasi',           id: 'lokasi' },
-    { label: 'FAQ',             href: '#faq',              id: 'faq' },
-    { label: 'Kontak',          href: '#kontak',           id: 'kontak' },
+    { label: 'Video', href: '#video', id: 'video' },
+    { label: 'Lokasi', href: '#lokasi', id: 'lokasi' },
+    { label: 'FAQ', href: '#faq', id: 'faq' },
   ]
 
   /* ── Scroll → scrolled state ─────────────────────────── */

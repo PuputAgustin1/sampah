@@ -87,17 +87,6 @@ export default function VideoFaqFeedback() {
               ))}
             </div>
           </div>
-
-          {/* Feedback Block */}
-          <div className="feedback-block reveal-right reveal-delay-2">
-            <h3>📢 SUARA ANDA PENTING!</h3>
-            <p className="feedback-text">
-              Berikan masukan atau laporkan kendala terkait sampah di desa kita.
-            </p>
-            <button className="feedback-btn">
-              Isi Formulir →
-            </button>
-          </div>
         </div>
       </div>
     </section>
